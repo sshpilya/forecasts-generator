@@ -1,3 +1,39 @@
+
+function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  const predictions = [
+    "Сегодня будет оличный день!",
+    "Не забудь очки, день будет солнечный!",
+    "Скоро ты встретишь свою любовь.",
+    "Обдумай все ещё разок.",
+    "Сделай то, что так давно плнируешь!"
+  ]
+
+  function getRandomPrediction() {
+    return predictions[getRandomNumber(0, predictions.length - 1)];
+}
+
+  const button = document.querySelector(".forecast-btn"); 
+  const currentTitle = document.querySelector(".current-forecast h1"); 
+  const currentProbability = document.querySelector(".current-forecast p"); 
+  const forecastsContainer = document.querySelector(".forecasts"); 
+  const template = document.getElementById("forecast-item"); 
+  
+  button.addEventListener("click", function () {
+    const prediction = getRandomPrediction(); 
+    const probability = getRandomNumber(0, 100) + "%"; 
+    currentTitle.textContent = prediction;
+    currentProbability.textContent = `Вероятность: ${probability}`;
+
+    const forecastItem = template.content.cloneNode(true);
+    forecastItem.querySelector("h3").textContent = prediction;
+    forecastItem.querySelector("p").textContent = `Вероятность: ${probability}`;
+
+    forecastsContainer.prepend(forecastItem); 
+})
+
 /* Генерация предсказания должна происходить при клике на кнопку «предсказать судьбу» */
 
 /* Заранее заготовь 3-5 предсказаний и в зависимости от того, как лягут карты судьбы (или что скажет Math.random) показывай их пользователю */
